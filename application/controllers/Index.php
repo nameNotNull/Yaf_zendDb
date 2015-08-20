@@ -23,6 +23,7 @@ class IndexController extends Yaf_Controller_Abstract {
 
         
         var_dump($res);
+        /*
         $adapter = new Zend_Db_Table();
         $adapter->setDefaultAdapter($db);
         $obj = new UserTableModel();
@@ -32,7 +33,7 @@ class IndexController extends Yaf_Controller_Abstract {
             'author' => 'Arthur',
             'color' => 'blue'
         );
-        $obj->insert($data);
+        $obj->insert($data);*/
     }
 }
 ?>
