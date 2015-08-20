@@ -1,0 +1,80 @@
+Bootstrap	application\bootstrap.php	/^class Bootstrap extends Yaf_Bootstrap_Abstract {$/;"	c
+_initConfig	application\bootstrap.php	/^    public function _initConfig() {$/;"	f
+arrConfig	application\bootstrap.php	/^        $arrConfig = Yaf_Application::app()->getConfig(); \/\/把配置保存起来$/;"	v
+IndexController	application\controllers\Index.php	/^class IndexController extends Yaf_Controller_Abstract {$/;"	c
+dbObj	application\controllers\Index.php	/^   		$dbObj = new Db_Table('test','user');$/;"	v
+field	application\controllers\Index.php	/^   		$field = array();$/;"	v
+indexAction	application\controllers\Index.php	/^   public function indexAction() {\/\/默认Action$/;"	f
+res	application\controllers\Index.php	/^   		$res = $dbObj->getAll( $field,$whereArr);$/;"	v
+res	application\controllers\Index.php	/^   		$res = $dbObj->getCount('id=3');$/;"	v
+whereArr	application\controllers\Index.php	/^   		$whereArr = array('order'=>'id','limit'=>'3');$/;"	v
+Db_Base	application\library\Db\Base.php	/^class Db_Base {$/;"	c
+__construct	application\library\Db\Base.php	/^    public function __construct() {$/;"	f
+_db	application\library\Db\Base.php	/^            $this->_db = $this->_read_db;$/;"	v
+_db	application\library\Db\Base.php	/^            $this->_db = $this->_write_db;$/;"	v
+_db	application\library\Db\Base.php	/^        $this->_db = $this->_read_db;$/;"	v
+_db	application\library\Db\Base.php	/^        $this->_db = $this->_write_db;$/;"	v
+_db	application\library\Db\Base.php	/^    private $_db; \/\/数据库连接$/;"	v
+_instance	application\library\Db\Base.php	/^    private static $_instance = null; \/\/唯一实例.$/;"	v
+_read_config	application\library\Db\Base.php	/^        $this->_read_config = $config->read; \/\/读配置文件$/;"	v
+_read_config	application\library\Db\Base.php	/^    private $_read_config; \/\/读库的配置$/;"	v
+_read_db	application\library\Db\Base.php	/^        $this->_read_db = $this->getConnection($this->_read_config);$/;"	v
+_read_db	application\library\Db\Base.php	/^    private $_read_db = null; \/\/读数据库连接$/;"	v
+_write_config	application\library\Db\Base.php	/^        $this->_write_config = $config->write; \/\/写配置文件$/;"	v
+_write_config	application\library\Db\Base.php	/^    private $_write_config; \/\/写库的配置$/;"	v
+_write_db	application\library\Db\Base.php	/^        $this->_write_db = $this->getConnection($this->_write_config);$/;"	v
+_write_db	application\library\Db\Base.php	/^    private $_write_db = null; \/\/写数据库连接$/;"	v
+config	application\library\Db\Base.php	/^        $config = Yaf_Registry::get('config')->mysql; \/\/获取配置文件$/;"	v
+db	application\library\Db\Base.php	/^        $db = new mysqli($DbconfigArr['host'], $DbconfigArr['username'], $DbconfigArr['password'], $DbconfigArr['dbname'], $DbconfigArr['port']);$/;"	v
+factory	application\library\Db\Base.php	/^    public static function factory() {$/;"	f
+fetchAssoc	application\library\Db\Base.php	/^    public function fetchAssoc($sql) {$/;"	f
+fetchRow	application\library\Db\Base.php	/^    public function fetchRow($sql) {$/;"	f
+getConnection	application\library\Db\Base.php	/^    public function getConnection($DbconfigArr = array()) {$/;"	f
+getFieldStr	application\library\Db\Base.php	/^    public function getFieldStr($arrayField = array()) {$/;"	f
+insert	application\library\Db\Base.php	/^    public function insert($sql) {$/;"	f
+modify	application\library\Db\Base.php	/^    public function modify($sql) {$/;"	f
+newArr	application\library\Db\Base.php	/^        $newArr = array();$/;"	v
+query	application\library\Db\Base.php	/^    public function query($sqlUrl) {$/;"	f
+readConntection	application\library\Db\Base.php	/^    public function readConntection() {$/;"	f
+result	application\library\Db\Base.php	/^        $result = $this->_db->query($sql);$/;"	v
+result	application\library\Db\Base.php	/^        $result = $this->_db->query($sqlUrl);$/;"	v
+result	application\library\Db\Base.php	/^        $result = $this->query($sql);$/;"	v
+returnArr	application\library\Db\Base.php	/^        $returnArr = array();$/;"	v
+row	application\library\Db\Base.php	/^        $row = $result->fetch_array(MYSQL_ASSOC); \/\/获取第一条数据$/;"	v
+row	application\library\Db\Base.php	/^        $row = array();$/;"	v
+witeConntection	application\library\Db\Base.php	/^    public function witeConntection() {$/;"	f
+Db_Table	application\library\Db\Table.php	/^class Db_Table extends Db_Base {$/;"	c
+__construct	application\library\Db\Table.php	/^    public function __construct($dbName,$tableName) {$/;"	f
+_dataBaseName	application\library\Db\Table.php	/^        $this->_dataBaseName = $dbName;$/;"	v
+_dataBaseName	application\library\Db\Table.php	/^    protected $_dataBaseName; \/\/数据库名称$/;"	v
+_db	application\library\Db\Table.php	/^        $this->_db = Db_Base::factory();$/;"	v
+_db	application\library\Db\Table.php	/^    protected $_db; \/\/数据库链接$/;"	v
+_getDataBaseTableName	application\library\Db\Table.php	/^    public function _getDataBaseTableName() {$/;"	f
+_primaryKey	application\library\Db\Table.php	/^    protected $_primaryKey; \/\/主键$/;"	v
+_tableName	application\library\Db\Table.php	/^        $this->_tableName = $tableName;$/;"	v
+_tableName	application\library\Db\Table.php	/^    protected $_tableName; \/\/表名$/;"	v
+count	application\library\Db\Table.php	/^        $count = $this->_db->fetchRow($sql);$/;"	v
+count	application\library\Db\Table.php	/^        $count = array();$/;"	v
+field	application\library\Db\Table.php	/^     参数说明：$field = array('field1','field2',...);\/\/如果是全部的字段 $field = array();空数组$/;"	v
+fieldStr	application\library\Db\Table.php	/^            $fieldStr = $this->getFieldStr($fieldArr);$/;"	v
+fieldStr	application\library\Db\Table.php	/^            $fieldStr = '*';$/;"	v
+getAll	application\library\Db\Table.php	/^    public function getAll($fieldArr = array() , $whereArr = array()) {$/;"	f
+getCount	application\library\Db\Table.php	/^    public function getCount($where = '') {$/;"	f
+limitStr	application\library\Db\Table.php	/^        isset($whereArr['limit']) ? $limitStr = ' limit ' . $whereArr['limit'] : $limitStr = ' limit 10 ';$/;"	v
+orderStr	application\library\Db\Table.php	/^        isset($whereArr['order']) ? $orderStr = ' order by ' . $whereArr['order'] : $orderStr = ' ';$/;"	v
+sql	application\library\Db\Table.php	/^            $sql = 'select count(*) as count from ' . $this->_getDataBaseTableName() . ' where ' . $where;$/;"	v
+sql	application\library\Db\Table.php	/^            $sql = 'select count(*) as count from ' . $this->_getDataBaseTableName();$/;"	v
+sql	application\library\Db\Table.php	/^        $sql = '';$/;"	v
+sql	application\library\Db\Table.php	/^        $sql = 'SELECT ' . $fieldStr . ' from ' . $this->_getDataBaseTableName() . $whereStr . $orderStr . $limitStr;$/;"	v
+whereArr	application\library\Db\Table.php	/^     $whereArr = array('where'=>'','order'=->'','limit')；\/\/条件数组$/;"	v
+whereArr	application\library\Db\Table.php	/^    public function getAll($fieldArr = array() , $whereArr = array()) {$/;"	v
+whereStr	application\library\Db\Table.php	/^        isset($whereArr['where']) ? $whereStr = ' where ' . $whereArr['where'] : $whereStr = ' where 1=1 ';$/;"	v
+APPLICATION_PATH	public\index.php	/^define("APPLICATION_PATH",  realpath(APP_PATH.'\/application'));$/;"	d
+APP_PATH	public\index.php	/^define("APP_PATH",  realpath(dirname(__FILE__) . '\/..\/')); \/* 指向public的上一级 *\/$/;"	d
+app	public\index.php	/^$app  = new Yaf_Application(APP_PATH . "\/conf\/application.ini",'product');$/;"	v
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.8	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/

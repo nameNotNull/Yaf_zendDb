@@ -21,9 +21,10 @@ class IndexController extends Yaf_Controller_Abstract {
         $result = $db->query($sql);
         $res = $result->fetchAll();
 
+        
+        var_dump($res);
         $adapter = new Zend_Db_Table();
         $adapter->setDefaultAdapter($db);
-        var_dump($res);
         $obj = new UserTableModel();
         $data = array(
             'id' => '1',
