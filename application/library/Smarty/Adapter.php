@@ -1,15 +1,14 @@
 <?php
-/**
- * 视图引擎定义
- * Smarty/Adapter.php
- */
-class Smarty_Adapter implements Yaf_View_Interface{
+/*确保Smarty.class.php在Smarty/libs/下*/
+Yaf_Loader::import( "Smarty/Smarty.class.php");   /*基类目录为library*/
+require_once(SMARTY_PATH."/Smarty/internals/core.write_compiled_resource.php");  
+class Smarty_Adapter implements Yaf_View_Interface   /*Smarty_Adapter类为yaf与smarty之间的适配器*/
+{
     /**
      * Smarty object
      * @var Smarty
      */
     public $_smarty;
- 
     /**
      * Constructor
      *
@@ -18,19 +17,102 @@ class Smarty_Adapter implements Yaf_View_Interface{
      * @return void
      */
     public function __construct($tmplPath = null, $extraParams = array()) {
-
-        require "Smarty.class.php";
         $this->_smarty = new Smarty;
- 
         if (null !== $tmplPath) {
             $this->setScriptPath($tmplPath);
         }
- 
+        if(!is_dir($extraParams['compile_dir'])){
+            mkdir($extraParams['compile_dir']);
+        }
         foreach ($extraParams as $key => $value) {
             $this->_smarty->$key = $value;
         }
     }
- 
+    /**
+     * Return the template engine object
+     *
+     * @return Smarty
+     */
+    public function getEngine() {
+        return $this->_smarty;
+    }
+    /**
+     * Set the path to the templates
+     *
+     * @param string $path The directory to set as the path.
+     * @return void
+     */
+    public function setScriptPath($path)
+    {
+        if (is_readable($path)) {
+            $this->_smarty->template_dir = $path;
+            return;
+        }
+        throw new Exception('Invalid path provided');
+    }
+ /**
+     * Retrieve the current template directory
+     *
+     * @return string
+     */
+    public function getScriptPath()
+    {
+        return $this->_smarty->template_dir;
+    }
+    /**
+     * Alias for setScriptPath
+     *
+     * @param string $path
+     * @param string $prefix Unused
+     * @return void
+     */
+    public function setBasePath($path, $prefix = 'Zend_View')
+    {
+        return $this->setScriptPath($path);
+    }
+    /**
+     * Alias for setScriptPath
+     *
+     * @param string $path
+     * @param string $prefix Unused
+     * @return void
+     */
+    public function addBasePath($path, $prefix = 'Zend_View')
+    {
+        return $this->setScriptPath($path);
+    }
+    /**
+     * Assign a variable to the template
+     *
+     * @param string $key The variable name.
+     * @param mixed $val The variable value.
+     * @return void
+     */
+    public function __set($key, $val)
+    {
+        $this->_smarty->assign($key, $val);
+    }
+    /**
+     * Allows testing with empty() and isset() to work
+     *
+     * @param string $key
+     * @return boolean
+     */
+    public function __isset($key)
+    {
+        return (null !== $this->_smarty->get_template_vars($key));
+    }
+    /**
+     * Allows unset() on object properties to work
+     *
+     * @param string $key
+     * @return void
+     */
+    public function __unset($key)
+    {
+        $this->_smarty->clear_assign($key);
+    }
+
     /**
      * Assign variables to the template
      *
@@ -49,43 +131,31 @@ class Smarty_Adapter implements Yaf_View_Interface{
             $this->_smarty->assign($spec);
             return;
         }
- 
         $this->_smarty->assign($spec, $value);
     }
- 
+    /**
+     * Clear all assigned variables
+     *
+     * Clears all variables assigned to Zend_View either via
+     * {@link assign()} or property overloading
+     * ({@link __get()}/{@link __set()}).
+     *
+     * @return void
+     */
+    public function clearVars() {
+        $this->_smarty->clear_all_assign();
+    }
     /**
      * Processes a template and returns the output.
      *
      * @param string $name The template to process.
      * @return string The output.
      */
-    public function render($name,$tpl_vars = array()) {
+    public function render($name, $value = NULL) {
         return $this->_smarty->fetch($name);
     }
-
-	public function display($name, $tpl_vars = array()) {
-		//die(var_dump($name));
-		if (!empty($tpl_vars))
-		{
-			$this->assign($tpl_vars);
-		}
-		echo $this->_smarty->display($name);
-	}
-	public function setScriptPath($path) {
-		if (is_readable($path))
-		{
-			$this->_smarty->template_dir = $path;
-		}
-		else
-		{
-			throw new Exception('Invalid path provided');
-		}
-	}
-
-	public function getScriptPath() {
-		return $this->_smarty->template_dir;
-	}
-
-
+    public function display($name, $value = NULL) {
+        echo $this->_smarty->fetch($name);
+    }
 }
 ?>
